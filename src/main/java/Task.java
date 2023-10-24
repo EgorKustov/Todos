@@ -11,9 +11,6 @@ public abstract class Task {
         return id;
     }
 
-    // Ниже находятся вспомогательные методы для корректной работы equals
-    // Переопределять их в наследниках не нужно
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

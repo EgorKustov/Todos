@@ -46,7 +46,7 @@ public class TodosTest {
         todos.add(task3);
         Task[] result = todos.search("Выкатка 3й версии приложения");
 
-        assertEquals(1, result.length); // Проверка на отсутствие найденных задач
+        assertEquals(1, result.length);
         assertEquals(task3, result[0]);
     }
 

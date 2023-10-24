@@ -7,6 +7,7 @@ public class Epic extends Task {
     }
 
     public String[] getSubtasks() {
+
         return subtasks;
     }
 
@@ -18,9 +19,9 @@ public class Epic extends Task {
         // Перебираем подзадачи и проверяем каждую через if
         for (String subtask : subtasks) {
             if (subtask.contains(query)) {
-                return true; // если найдено совпадение, возвращаем true
+                return true;
             }
         }
-        return false; // если совпадение не найдено после проверки всех подзадач, возвращаем false
+        return false;
     }
 }
