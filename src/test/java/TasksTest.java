@@ -10,7 +10,7 @@ public class TasksTest {
     public void testSimpleTaskMatches() {
         SimpleTask task = new SimpleTask(5, "Позвонить родителям");
         assertTrue(task.matches("Позвонить"));
-        assertFalse(task.matches("родителям"));
+        assertTrue(task.matches("родителям"));
     }
 
     @Test

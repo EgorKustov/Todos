@@ -1,14 +1,8 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
 
 public class TodosTest {
-
-
-    public TodosTest() {
-
-    }
 
     @Test
     public void shouldAddThreeTasksOfDifferentType() {
@@ -36,31 +30,50 @@ public class TodosTest {
     }
 
     @Test
-    public void testSearchWithMatchingQuery() {
+    public void testSearchWithOneMatchingQuery() {
         Todos todos = new Todos();
-        Task task1 = new SimpleTask(5, "Позвонить родителям");
-        Task task2 = new Epic(55, new String[]{"Молоко", "Яйца", "Хлеб"});
-        Task task3 = new Meeting(555, "Выкатка 3й версии приложения", "Приложение НетоБанка", "Во вторник после обеда");
-        todos.add(task1);
-        todos.add(task2);
-        todos.add(task3);
-        Task[] result = todos.search("Выкатка 3й версии приложения");
+        SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям");
+        Epic epic = new Epic(55, new String[]{"Молоко", "Яйца", "Хлеб"});
+        Meeting meeting = new Meeting(555, "Выкатка 3й версии приложения", "Приложение НетоБанка", "Во вторник после обеда");
 
-        assertEquals(1, result.length);
-        assertEquals(task3, result[0]);
+        todos.add(simpleTask);
+        todos.add(epic);
+        todos.add(meeting);
+
+        Task[] expected = {simpleTask};
+        Task[] result = todos.search("Позвонить");
+        Assertions.assertArrayEquals(expected, result);
+    }
+
+    @Test
+    public void testSearchWithTwoMatchingQuery() {
+        Todos todos = new Todos();
+        SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям");
+        Epic epic = new Epic(55, new String[]{"Молоко", "Яйца", "Хлеб"});
+        Meeting meeting = new Meeting(555, "Позвонить", "Приложение НетоБанка", "Во вторник после обеда");
+
+        todos.add(simpleTask);
+        todos.add(epic);
+        todos.add(meeting);
+
+        Task[] expected = {simpleTask, meeting};
+        Task[] result = todos.search("Позвонить");
+        Assertions.assertArrayEquals(expected, result);
     }
 
     @Test
     public void testSearchWithNoMatchingQuery() {
         Todos todos = new Todos();
-        Task task1 = new SimpleTask(5, "Позвонить родителям");
-        Task task2 = new Epic(55, new String[]{"Молоко", "Яйца", "Хлеб"});
-        Task task3 = new Meeting(555, "Выкатка 3й версии приложения", "Приложение НетоБанка", "Во вторник после обеда");
-        todos.add(task1);
-        todos.add(task2);
-        todos.add(task3);
-        Task[] result = todos.search("Парашют");
+        SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям");
+        Epic epic = new Epic(55, new String[]{"Молоко", "Яйца", "Хлеб"});
+        Meeting meeting = new Meeting(555, "Позвонить", "Приложение НетоБанка", "Во вторник после обеда");
 
-        assertEquals(0, result.length); // Проверка на отсутствие найденных задач
+        todos.add(simpleTask);
+        todos.add(epic);
+        todos.add(meeting);
+
+        Task[] expected = {};
+        Task[] result = todos.search("Капуста");
+        Assertions.assertArrayEquals(expected, result);
     }
 }

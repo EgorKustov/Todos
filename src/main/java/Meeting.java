@@ -12,14 +12,17 @@ public class Meeting extends Task {
     }
 
     public String getTopic() {
+
         return topic;
     }
 
     public String getProject() {
+
         return project;
     }
 
     public String getStart() {
+
         return start;
     }
 
